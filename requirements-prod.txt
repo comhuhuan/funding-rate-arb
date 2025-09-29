@@ -1,0 +1,13 @@
+# Include production requirements
+-r requirements.txt
+
+# Production monitoring
+sentry-sdk>=1.29.0
+datadog>=0.47.0
+
+# Security
+cryptography>=41.0.0
+
+# Performance
+ujson>=5.8.0
+uvloop>=0.17.0
