@@ -1,0 +1,46 @@
+# Production environment configuration
+# Inherits from base.yaml and overrides specific settings
+
+environment: "production"
+debug: false
+
+logging:
+  level: "INFO"
+  format_type: "json"
+
+exchanges:
+  default_config:
+    sandbox: false
+    timeout: 30000
+
+database:
+  host: "${DB_HOST}"
+  port: "${DB_PORT:5432}"
+  name: "${DB_NAME}"
+  user: "${DB_USER}"
+  password: "${DB_PASSWORD}"
+  ssl_mode: "require"
+
+redis:
+  host: "${REDIS_HOST}"
+  port: "${REDIS_PORT:6379}"
+  db: "${REDIS_DB:0}"
+  password: "${REDIS_PASSWORD}"
+  ssl: true
+
+arbitrage:
+  min_profit_threshold: 0.02  # 2%
+  max_position_size: 50000    # USD
+
+risk_management:
+  max_leverage: 2.0
+  max_portfolio_risk: 0.01  # 1%
+
+api:
+  host: "0.0.0.0"
+  port: "${API_PORT:8000}"
+  debug: false
+
+monitoring:
+  metrics_enabled: true
+  health_check_interval: 30  # seconds

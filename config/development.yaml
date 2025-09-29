@@ -1,0 +1,37 @@
+# Development environment configuration
+# Inherits from base.yaml and overrides specific settings
+
+environment: "development"
+debug: true
+
+logging:
+  level: "DEBUG"
+  format_type: "structured"
+
+exchanges:
+  default_config:
+    sandbox: true
+    timeout: 10000
+
+database:
+  host: "${DB_HOST:localhost}"
+  port: "${DB_PORT:5432}"
+  name: "${DB_NAME:funding_arb_dev}"
+  user: "${DB_USER:postgres}"
+  password: "${DB_PASSWORD:password}"
+
+redis:
+  host: "${REDIS_HOST:localhost}"
+  port: "${REDIS_PORT:6379}"
+  db: "${REDIS_DB:0}"
+  password: "${REDIS_PASSWORD:}"
+
+arbitrage:
+  # Lower thresholds for testing
+  min_profit_threshold: 0.005  # 0.5%
+  max_position_size: 1000      # USD
+
+api:
+  host: "127.0.0.1"
+  port: 8000
+  debug: true

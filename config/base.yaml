@@ -1,0 +1,63 @@
+# Base configuration for the funding rate arbitrage system
+# This file contains common settings shared across all environments
+
+system:
+  name: "funding-rate-arb"
+  version: "1.0.0"
+  timezone: "UTC"
+
+logging:
+  level: "INFO"
+  format_type: "standard"  # standard, json, structured
+
+exchanges:
+  # Default exchange configuration
+  default_config:
+    timeout: 30000  # milliseconds
+    rateLimit: 1000  # requests per minute
+    enableRateLimit: true
+    sandbox: false
+
+  # Supported exchanges
+  enabled:
+    - binance
+    - okx
+    - bybit
+    - bitmex
+
+market_data:
+  # WebSocket configuration
+  websocket:
+    ping_interval: 20
+    ping_timeout: 10
+    close_timeout: 10
+
+  # Data retention
+  retention:
+    funding_rates: 30  # days
+    market_data: 7     # days
+
+arbitrage:
+  # Minimum profit thresholds (in percentage)
+  min_profit_threshold: 0.01  # 1%
+  max_position_size: 10000    # USD
+
+  # Risk limits
+  max_open_positions: 5
+  max_daily_loss: 1000  # USD
+
+risk_management:
+  # Value at Risk parameters
+  var_confidence: 0.95
+  var_window: 100  # days
+
+  # Position limits
+  max_leverage: 3.0
+  max_portfolio_risk: 0.02  # 2%
+
+database:
+  # Connection pool settings
+  pool_size: 10
+  max_overflow: 20
+  pool_timeout: 30
+  pool_recycle: 3600
